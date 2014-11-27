@@ -39,11 +39,14 @@
  */
 package org.glassfish.jersey.examples.helloworld.spring;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Simple {@link GreetingService} implementation to just say hello.
  *
  * @author Marko Asplund (marko.asplund at yahoo.com)
  */
+@Component
 public class GreetingServiceImpl implements GreetingService {
     @Override
     public String greet(String who) {

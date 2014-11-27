@@ -42,6 +42,8 @@ package org.glassfish.jersey.examples.helloworld.spring;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.spring.scope.RequestContextFilter;
 
+import com.example.jerseryspring.ObjectMapperProvider;
+
 /**
  * Spring HelloWorld Web Application configuration.
  *
@@ -58,5 +60,6 @@ public class MyApplication extends ResourceConfig {
         register(SpringSingletonResource.class);
         register(SpringRequestResource.class);
         register(CustomExceptionMapper.class);
+        register(ObjectMapperProvider.class);
     }
 }

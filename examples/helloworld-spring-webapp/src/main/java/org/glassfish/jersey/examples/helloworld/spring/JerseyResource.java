@@ -41,11 +41,18 @@ package org.glassfish.jersey.examples.helloworld.spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.example.jerseryspring.persistence.User;
+import com.example.jerseryspring.persistence.UserDao;
+
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -64,6 +71,9 @@ public class JerseyResource {
 //    @Autowired
     @Inject
     private DateTimeService timeService;
+    
+    @Autowired
+    private UserDao userDao;
 
     public JerseyResource() {
         LOGGER.fine("HelloWorldResource()");
@@ -71,8 +81,24 @@ public class JerseyResource {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
+    @Path("/hello")
     public String getHello() {
         return String.format("%s: %s", timeService.getDateTime(), greetingService.greet("world"));
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/user")
+    public List<User> hi() {
+    	return userDao.findAll();
+    }
+    
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/user")
+    public User postUser(User user) {
+    	return userDao.save(user);
     }
 
 }
